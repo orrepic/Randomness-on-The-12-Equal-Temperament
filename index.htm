@@ -32,12 +32,13 @@
         const sleep = waitTime => new Promise( resolve => setTimeout(resolve, waitTime) );
         async function snd() {
             while(true){
-                length = Math.floor( Math.random() * 128 );
+                var dt = Math.floor( Math.random() * 3 ) * 1000;
+                var length = Math.floor( Math.random() * 128 );
                 if (length > 124) {
                     length = 124
                 }
                 var key = Math.round(length / 4);
-                makeSound(key);
+                makeSound(key, dt);
 
 
                 for (var i=1; i<33; i++) {
@@ -58,10 +59,10 @@
                     return (anime.random(50, -50))
                 },
                 easing: "easeOutElastic(1, 0.4)",
-                duration: 1500,
+                duration: (dt + 700),
             });
 
-                await sleep(3000);
+                await sleep(dt + 2000);
             }
         }
 
