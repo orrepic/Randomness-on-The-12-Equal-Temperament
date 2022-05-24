@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>LDS</title>
+</head>
+<body>
+
+    <script src="anime.min.js"></script>
+    <script src="sound.js"></script>
+
+    <div class="container">
+        <div class="box"></div>
+    </div>    
+
+    <script>
+
+        const box = document.querySelector('.box');
+
+        for(var i=0; i<32; i++){
+            const blocks = document.createElement('div');
+            blocks.classList.add('block');
+            box.appendChild(blocks);
+        }
+
+    </script>
+
+    <script>
+        const sleep = waitTime => new Promise( resolve => setTimeout(resolve, waitTime) );
+        async function snd() {
+            while(true){
+                length = Math.floor( Math.random() * 128 );
+                if (length > 124) {
+                    length = 124
+                }
+                var key = Math.round(length / 4);
+                makeSound(key);
+
+                var c = document.querySelector(".block");
+                c.style.color = '#808080';
+
+                anime({
+                targets: '.block',
+                translateY: function() {
+                    return (anime.random(100, -100))
+                },
+                translateX: function() {
+                    return (anime.random(100, -100))
+                },
+                rotate: function() {
+                    return (anime.random(50, -50))
+                },
+                easing: "easeOutElastic(1, 0.4)",
+                duration: 1500,
+            });
+
+                await sleep(3000);
+            }
+        }
+
+        snd()
+
+    </script>
+
+
+
+
+
+
+</body>
+</html>
