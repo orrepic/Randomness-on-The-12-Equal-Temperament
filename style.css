@@ -25,8 +25,8 @@ body {
 .block{
     background-color: #000000;
 
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     gap: 10px;
 
     border-radius: 50%;
