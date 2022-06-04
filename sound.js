@@ -6,12 +6,20 @@ window.AudioContext = window.AudioContext||window.webkitAudioContext;
 var audioContext = new AudioContext();
 
 var osciillatorNode = audioContext.createOscillator();
-
-osciillatorNode.frequency.value = pitch[key];
-
+var gain = audioContext.createGain();
 var audioDestinationNode = audioContext.destination;
 
-osciillatorNode.connect(audioDestinationNode);
+osciillatorNode.connect(gain);
+osciillatorNode.frequency.value = pitch[key];
+
+if(dt != 0) {
+    gain.gain.setValueAtTime(0, 0);
+    gain.gain.linearRampToValueAtTime(0.5, 0.1);
+    gain.gain.linearRampToValueAtTime(0, (dt/1000));
+    gain.connect(audioDestinationNode);
+}
+
+// osciillatorNode.connect(audioDestinationNode);
 
 osciillatorNode.start = osciillatorNode.start || osciillatorNode.noteOn;
 osciillatorNode.start();
